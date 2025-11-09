@@ -1,12 +1,17 @@
 export interface User {
-  name: string;        
-  phone: string;       
-  avatar?: string;     
+  _id: string;
+  firstName: string;
+  lastName?: string;
+  phone: string;
+  email: string;
+  avatar?: string;   
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 // ---------- AUTH ----------
 export interface RegisterRequest {
-  name: string;
+  firstName: string;
   phone: string;       
   password: string;
 }

@@ -27,7 +27,7 @@ export default function LoginForm() {
       const user: User = await login(values.phone, values.password);
       setUser(user);
       toast.success("Вітаємо, вхід успішно виконано!");
-      router.push("/profile");
+      router.push("/");
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : "Помилка входу";
       toast.error(errorMessage);

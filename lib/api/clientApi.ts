@@ -1,15 +1,28 @@
 import { nextServer, ApiError } from "./api";
 import type { User, RegisterRequest } from "@/types/user";
 
-// ---------- AUTH ----------
 export const login = async (phone: string, password: string): Promise<User> => {
-  const res = await nextServer.post("/auth/login", { phone, password });
-  return res.data.user;
+  const cleanPhone = phone.replaceAll(/[\s()\-+]/g, "");
+  try {
+    const res = await nextServer.post("/auth/login", { phone: cleanPhone, password });
+    return res.data.user;
+  } catch (err: any) {
+    throw new Error(err.response?.data?.error || err.message || "Помилка авторизації");
+  }
 };
 
 export const register = async (payload: RegisterRequest): Promise<User> => {
-  const res = await nextServer.post("/auth/register", payload);
-  return res.data.user;
+  const cleanPayload = {
+    firstName: payload.firstName.trim(),
+    phone: payload.phone.trim().replaceAll(/[\s()\-+]/g, ""),
+    password: payload.password,
+  };
+  try {
+    const res = await nextServer.post("/auth/register", cleanPayload);
+    return res.data.user;
+  } catch (err: any) {
+    throw new Error(err.response?.data?.error || err.message || "Помилка реєстрації");
+  }
 };
 
 export const logout = async (): Promise<void> => {

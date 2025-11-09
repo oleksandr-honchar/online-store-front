@@ -12,7 +12,7 @@ import css from "./RegistrationForm.module.css";
 
 // Схема валідації
 const schema = Yup.object({
-  name: Yup.string()
+  firstName: Yup.string()
     .max(32, "Ім'я не повинно перевищувати 32 символи")
     .required("Введіть ім'я"),
   phone: Yup.string().required("Введіть номер телефону"),
@@ -27,18 +27,18 @@ export default function RegistrationForm() {
   const setUser = useAuthStore((s) => s.setUser);
 
   const handleSubmit = async (
-    values: { name: string; phone: string; password: string },
+    values: { firstName: string; phone: string; password: string },
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) => {
     try {
       const user: User = await register({
-        name: values.name,
+        firstName: values.firstName,
         phone: values.phone,
         password: values.password,
       });
       setUser(user);
       toast.success("Реєстрація успішна! Вітаємо в Clothica!");
-      router.push("/profile");
+      router.push("/");
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : "Помилка реєстрації";
       toast.error(errorMessage);
@@ -66,7 +66,7 @@ export default function RegistrationForm() {
         </div>
 
         <Formik
-          initialValues={{ name: "", phone: "", password: "" }}
+          initialValues={{ firstName: "", phone: "", password: "" }}
           validationSchema={schema}
           onSubmit={handleSubmit}
         >
@@ -74,18 +74,18 @@ export default function RegistrationForm() {
             <Form className={css.form}>
               {/* Name */}
               <div className={css.formGroup}>
-                <label htmlFor="name" className={css.label}>
+                <label htmlFor="firstName" className={css.label}>
                   Ім'я*
                 </label>
                 <Field
-                  id="name"
-                  name="name"
+                  id="firstName"
+                  name="firstName"
                   type="text"
                   placeholder="Ваше ім'я"
                   className={css.input}
                   maxLength={32}
                 />
-                <ErrorMessage name="name" component="span" className={css.errorText} />
+                <ErrorMessage name="firstName" component="span" className={css.errorText} />
               </div>
 
               {/* Phone */}
