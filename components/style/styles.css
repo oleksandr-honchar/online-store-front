@@ -1,64 +1,118 @@
+
 :root {
     --color-scheme-4-background: #F1F8EE;
+    --color-text-primary: #333;
+    --color-text-secondary: #555;
+    --color-accent-green: #7dc081;
 }
 
-.unique-style-section {
-    background-color: #F1F8EE;
-    padding: 48px 64px;
-    margin-bottom: 48px;
-    border-radius: 2px;
-    max-width: 1312px;
-    margin-left: auto;
-    margin-right: auto;
+/* ======================================================= */
+/* MOBILE FIRST (Mobile: 320px - 767px)                    */
+/* ======================================================= */
+
+.uniqueStyleSection {
+    background-color: var(--color-scheme-4-background);
+    padding: 32px 16px;
+    margin: 0 auto 40px auto;
+    width: 100%;
 }
 
-.unique-style-section h2 {
-    font-size: 32px;
+.uniqueStyleSection h2 {
+    font-size: 24px;
     font-weight: bold;
-    color: #333;
-    margin-bottom: 40px;
+    color: var(--color-text-primary);
+    margin-bottom: 30px;
     text-align: center;
 }
 
-.features-container {
+.featuresContainer {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     gap: 30px;
 }
 
-.feature-item {
-    flex: 1;
+.featureItem {
     text-align: center;
-    padding: 20px 15px;
+    padding: 10px 0;
 }
 
-.icon-placeholder {
-    font-size: 36px;
-    color: #388E3C;
-    margin-bottom: 15px;
-}
-
-.feature-item h3 {
-    font-size: 18px;
-    font-weight: 600;
+.iconPlaceholder {
+    font-size: 30px;
+    color: var(--color-scheme-5-foreground);
     margin-bottom: 10px;
-    color: #333;
 }
 
-.feature-item p {
-    font-size: 14px;
-    line-height: 1.5;
-    color: #555;
+.featureItem h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--color-text-primary);
 }
 
-/* Медіа-запит для мобільних пристроїв (елементи стають вертикальними) */
-@media (max-width: 768px) {
-    .unique-style-section {
-        padding: 30px 20px;
+.featureItem p {
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--color-text-secondary);
+}
+
+
+/* ======================================================= */
+/* ТОЧКА ПЕРЕЛОМУ: Mobile Adaptive (min-width: 375px)      */
+/* ======================================================= */
+@media (min-width: 375px) {
+    .uniqueStyleSection {
+        padding: 40px 20px;
+    }
+}
+
+/* ======================================================= */
+/* ТОЧКА ПЕРЕЛОМУ: Tablet (min-width: 768px)               */
+/* ======================================================= */
+@media (min-width: 768px) {
+    .uniqueStyleSection {
+        padding: 48px 40px;
     }
 
-    .features-container {
-        flex-direction: column;
+    .uniqueStyleSection h2 {
+        font-size: 28px;
+        margin-bottom: 40px;
+    }
+
+    .featuresContainer {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .featureItem {
+        flex: 1;
+        padding: 20px 15px;
+    }
+
+    .featureItem h3 {
+        font-size: 18px;
+    }
+
+    .featureItem p {
+        font-size: 14px;
     }
 }
 
+/* ======================================================= */
+/* ТОЧКА ПЕРЕЛОМУ: Desktop (min-width: 1440px)             */
+/* ======================================================= */
+@media (min-width: 1440px) {
+    .uniqueStyleSection {
+        padding: 48px 64px;
+        max-width: 1440px;
+        border-radius: 8px;
+    }
+
+    .uniqueStyleSection h2 {
+        font-size: 32px;
+    }
+
+    .featuresContainer {
+        gap: 30px;
+    }
+}
