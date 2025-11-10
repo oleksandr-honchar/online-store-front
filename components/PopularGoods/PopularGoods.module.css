@@ -41,6 +41,11 @@
   padding: 0;
 }
 
+.viewAll:hover {
+  background-color: #BEE196;
+  color: #fff;
+}
+
 .slider {
   padding-bottom: 24px;
 }
@@ -131,6 +136,11 @@
   line-height: 40px;
 }
 
+.moreBtn:hover {
+  background-color: #BEE196;
+  color: #fff;
+}
+
 .paginationWrapper {
   width: 100%;
   position: absolute;
@@ -179,19 +189,53 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: #f2f8e9;
+  background-color: #BEE196;
   border: none;
   box-shadow: 0 2px 6px rgba(0,0,0,0.12);
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  color: #000;
 }
+
+/* Hover */
+.navPrev:hover,
+.navNext:hover {
+  background-color: #BEE196;
+  color: #000;
+}
+
+/* Focus */
+.navPrev:focus,
+.navNext:focus {
+  background-color: #E6F0D9;
+  color: #000;
+  outline: 2px solid #E6F0D9
+}
+
+/* Active
+.navPrev:active,
+.navNext:active {
+  background-color: #3B4B2F;
+  color: #FFFFFF;
+} */
+
+/* Disabled */
+.navPrev:disabled,
+.navNext:disabled {
+  background-color: #E6F0D9;
+  color: #A1A1A1;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+
 
 .iconArrow {
   width: 16px;
   height: 16px;
-  color: #000;
+  color: inherit;
 }
 /* #endregion mobile */
 
@@ -277,6 +321,15 @@
   .card {
     max-width: 100%;
   }
+
+  .viewAll:hover{
+    cursor: pointer;
+  }
+
+  .moreBtn:hover{
+  cursor: pointer;
+  
+}
 
   .navPrev {
     left: 29px;
