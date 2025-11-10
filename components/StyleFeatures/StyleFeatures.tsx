@@ -1,8 +1,16 @@
 
-import styles from './Style.module.css';
+import styles from './StyleFeatures.module.css';
+import React from 'react'; 
 
-export default function Style() {
-  const advantages = [
+interface Advantage {
+  icon: string; 
+  title: string;
+  description: string;
+}
+
+export default function StyleFeatures(): React.JSX.Element { 
+  
+  const advantages: Advantage[] = [
     {
       icon: '💧', 
       title: 'Якість та натуральність',
@@ -22,27 +30,18 @@ export default function Style() {
 
   return (
     <section className={styles.style}>
-      {/* Додано div для центрування та обмеження ширини (styles.container),
-          аналогічно коду іншого студента */}
       <div className={styles.container}>
-        {/* header-block та h2 об'єднано в styles.title */}
-        <h2 className={styles.title}>Обери свій унікальний стиль сьогодні!</h2>
-        
-        {/* features-container -> ul (styles.advantagesList) */}
+        <h2 className={styles.title}>Обери свій унікальний стиль сьогодні!</h2> 
+        {}
         <ul className={styles.advantagesList}>
-          {advantages.map((advantage, index) => (
-            // feature-item -> li (styles.advantageItem)
+          {advantages.map((advantage: Advantage, index: number) => ( 
             <li key={index} className={styles.advantageItem}>
-              {/* icon-placeholder -> styles.iconContainer */}
               <div className={styles.iconContainer}>
-                {/* Використовуємо символ як іконку */}
                 <span className={styles.icon}>{advantage.icon}</span> 
               </div>
               
-              {/* h3 -> styles.advantageTitle */}
               <h3 className={styles.advantageTitle}>{advantage.title}</h3>
               
-              {/* p -> styles.advantageDescription */}
               <p className={styles.advantageDescription}>{advantage.description}</p>
             </li>
           ))}

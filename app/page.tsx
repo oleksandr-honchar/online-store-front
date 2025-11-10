@@ -2,6 +2,7 @@
 
 import PopularCategories from '@/components/CategoriesSection/PopularCategories';
 import Link from 'next/link';
+import StyleFeatures from '@/components/StyleFeatures/StyleFeatures';
 
 export default function HomePage() {
   return (
@@ -26,6 +27,7 @@ export default function HomePage() {
         </Link>
       </div>
       <PopularCategories />
+      <StyleFeatures/>
     </main>
   );
 }
