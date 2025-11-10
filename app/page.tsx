@@ -1,6 +1,6 @@
 'use client';
 
-import Categories from '@/components/CategoriesSection/Categories';
+import PopularCategories from '@/components/CategoriesSection/PopularCategories';
 import Link from 'next/link';
 
 export default function HomePage() {
@@ -25,7 +25,7 @@ export default function HomePage() {
           Go to Login
         </Link>
       </div>
-      <Categories />
+      <PopularCategories />
     </main>
   );
 }

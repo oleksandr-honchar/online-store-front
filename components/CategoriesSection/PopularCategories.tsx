@@ -2,37 +2,22 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import css from './Categories.module.css';
-// import { useMediaQuery } from 'react-responsive';
+import css from './PopularCategories.module.css';
+
 import { useEffect, useState } from 'react';
-// import axios from 'axios';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Keyboard, A11y } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Category, getCategories } from './categories';
+import { getCategories } from '@/lib/api/clientApi';
+import { Category } from '@/types/user';
 
-const Categories = () => {
+const PopularCategories = () => {
   const [categories, setCategories] = useState<Category[]>(
     []
   );
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-  // const [mounted, setMounted] = useState(false);
-
-  // const [visibleCount, setVisibleCount] = useState(3);
-
-  // const isMobile = useMediaQuery({ maxWidth: 767 });
-  // const isTablet = useMediaQuery({
-  //   minWidth: 768,
-  //   maxWidth: 1439,
-  // });
-  // const isDesktop = useMediaQuery({ minWidth: 1440 });
-
-  // useEffect(() => {
-  //   setMounted(true);
-  // }, []);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -41,28 +26,13 @@ const Categories = () => {
         setCategories(data);
       } catch (err) {
         setError((err as Error).message);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchCategories();
   }, []);
 
-  if (loading)
-    return (
-      <p className={css.loading}>
-        Завантаження категорій...
-      </p>
-    );
   if (error) return <p className={css.error}>{error}</p>;
-
-  // if (!mounted) return null;
-
-  // const visibleCategories = categories.slice(
-  //   0,
-  //   visibleCount
-  // );
 
   return (
     <section className={css.categoriesSection}>
@@ -135,4 +105,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default PopularCategories;
