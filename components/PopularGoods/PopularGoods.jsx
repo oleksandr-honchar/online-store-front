@@ -17,6 +17,17 @@ export default function PopularGoods({ goods }) {
   const nextRef = useRef(null);
   const paginationRef = useRef(null);
 
+  const normalizeGoods = (good) => ({
+    id: good._id,
+    title: good.name,
+    image: good.image,
+    price: good.price?.value,
+    rating: good.avgRating || 0,
+    reviews: good.feedbackCount || 0,
+  });
+
+  const normalizedGoods = goods.map(normalizeGoods);
+
   useEffect(() => {
     if (paginationRef.current) {
       paginationRef.current.classList.remove(

@@ -214,12 +214,6 @@
   outline: 2px solid #E6F0D9
 }
 
-/* Active
-.navPrev:active,
-.navNext:active {
-  background-color: #3B4B2F;
-  color: #FFFFFF;
-} */
 
 /* Disabled */
 .navPrev:disabled,
