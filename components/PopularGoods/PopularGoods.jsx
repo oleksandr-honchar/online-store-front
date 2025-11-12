@@ -102,7 +102,7 @@ export default function PopularGoods({ goods }) {
         onSwiper={handleSwiperInit}
         className={styles.slider}
       >
-        {goods.map((item) => (
+        {normalizedGoods.map((item) => (
           <SwiperSlide key={item.id} className={styles.slide}>
             <div className={styles.card}>
               <div className={styles.imageBox}>

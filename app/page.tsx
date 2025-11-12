@@ -1,3 +1,5 @@
+import PopularGoods from "../components/PopularGoods/PopularGoods"
+
 async function getGoods() {
   const res = await fetch(
     "https://clothica-go-it-prod-team-2-back.onrender.com/api/goods",
@@ -5,7 +7,7 @@ async function getGoods() {
   );
 
   const json = await res.json();
-  return json.data; // массив товаров
+  return json.data; 
 }
 
 export default async function HomePage() {
