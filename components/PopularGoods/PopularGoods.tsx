@@ -25,7 +25,7 @@ const PopularGoods = () => {
       try {
         const data = await getGoodsbyFeedback({
           page: 1,
-          perPage: 20,
+          perPage: 10,
         });
         setGoods(data);
       } catch (err) {
@@ -39,7 +39,9 @@ const PopularGoods = () => {
   useEffect(() => {
     const updatePaginationPosition = () => {
       if (!paginationRef.current) return;
+
       if (window.innerWidth < 768) {
+        paginationRef.current.style.display = 'flex';
         paginationRef.current.style.justifyContent =
           'flex-start';
         paginationRef.current.style.left = '20px';
@@ -52,6 +54,9 @@ const PopularGoods = () => {
           'translateX(-50%)';
       }
     };
+
+    const handleResize = () => requestAnimationFrame(updatePaginationPosition);
+
     window.addEventListener(
       'resize',
       updatePaginationPosition
@@ -60,7 +65,7 @@ const PopularGoods = () => {
     return () =>
       window.removeEventListener(
         'resize',
-        updatePaginationPosition
+        handleResize
       );
   }, []);
 

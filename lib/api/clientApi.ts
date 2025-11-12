@@ -15,7 +15,6 @@ export const login = async (phone: string, password: string): Promise<User> => {
     return res.data;
   } catch (err: any) {
     const serverMessage = err.response?.data?.error || err.response?.data?.message;
-    
     if (err.response?.status === 401) {
       throw new Error("Невірний номер телефону або пароль");
     } else if (serverMessage) {
@@ -34,7 +33,7 @@ export const register = async (payload: RegisterRequest): Promise<User> => {
   };
   
   try {
-    const res = await localApi.post('/auth/register', cleanPayload); // ← localApi!
+    const res = await localApi.post('/auth/register', cleanPayload); 
     return res.data;
   } catch (err: any) {
     throw new Error(
@@ -69,7 +68,7 @@ export const updateUserProfile = async (
   payload: Partial<User>
 ): Promise<User> => {
   try {
-    const { data } = await localApi.patch<User>('/user/me', payload); // ← localApi!
+    const { data } = await localApi.patch<User>('/user/me', payload); 
     return data;
   } catch (err) {
     const error = err as ApiError;
