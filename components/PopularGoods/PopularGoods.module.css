@@ -4,7 +4,7 @@
   height: 866px;
   margin: 0 auto;
   padding: 48px 20px;
-  background: #f2f8e9;
+
   border-radius: 20px;
   box-sizing: border-box;
   position: relative;
@@ -106,8 +106,8 @@
 
 .leftMeta {
   display: flex;
-  align-items: center; 
-  gap: 12px; 
+  align-items: center;
+  gap: 12px;
 }
 
 .metaItem {
@@ -156,7 +156,7 @@
   justify-content: flex-start;
   gap: 6px;
   width: auto;
-  position: static; 
+  position: static;
   transform: none;
 }
 
@@ -164,24 +164,24 @@
 .swiper-pagination-bullet {
   width: 8px;
   height: 8px;
-  background: #000;
+  background: #000 !important;
   opacity: 1;
   border-radius: 50%;
 }
 
 .swiper-pagination-bullet-active {
   opacity: 1;
-  background: #000;
+  background: #000000 !important;
 }
 
 .navButtons {
   position: absolute;
   bottom: 16px;
-  right: 20px; 
+  right: 20px;
   display: flex;
   gap: 16px;
   z-index: 10;
-  
+
 }
 
 .navPrev,
@@ -191,7 +191,7 @@
   border-radius: 50%;
   background-color: #BEE196;
   border: none;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -231,16 +231,17 @@
   height: 16px;
   color: inherit;
 }
+
 /* #endregion mobile */
 
 /* #region tablet */
 @media (min-width: 768px) {
   .wrapper {
-    max-width: 1312px;
+    max-width: 768px;
     height: auto;
-    padding: 48px 32px ;
+    padding: 48px 32px;
   }
- 
+
   .imageBox {
     width: 336px;
     height: 414px;
@@ -266,8 +267,8 @@
     transform: translateY(-50%);
     z-index: 10;
   }
-  
-  
+
+
 
   .navButtons {
     position: static;
@@ -280,23 +281,24 @@
     display: flex;
     justify-content: center;
     margin-top: 16px;
-  } 
+  }
 
 
   .paginationWrapper {
-    position: static; 
+    position: static;
     justify-content: center;
     padding-left: 0;
     margin-top: 16px;
   }
 
-    .paginationWrapper .swiper-pagination {
+  .paginationWrapper .swiper-pagination {
     justify-content: center;
     left: auto;
     transform: none;
   }
 
 }
+
 /* #endregion tablet */
 
 /* #region desktop */
@@ -316,23 +318,23 @@
     max-width: 100%;
   }
 
-  .viewAll:hover{
+  .viewAll:hover {
     cursor: pointer;
   }
 
-  .moreBtn:hover{
-  cursor: pointer;
-  
-}
+  .moreBtn:hover {
+    cursor: pointer;
+
+  }
 
   .navPrev {
     left: 29px;
-   
+
   }
 
   .navNext {
     right: 29px;
-    
+
   }
 
   .navButtons {
@@ -344,4 +346,5 @@
     margin-top: 32px;
   }
 }
+
 /* #endregion desktop */
