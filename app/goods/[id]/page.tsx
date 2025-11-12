@@ -1,7 +1,7 @@
 'use client';
 
 import { getGoodById } from '@/lib/api/clientApi';
-import { Good } from '@/types/user';
+
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 
@@ -9,6 +9,7 @@ import css from './GoodsDetails.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Field, Form, Formik } from 'formik';
+import { Good } from '@/types/goods';
 
 interface GoodByIdPageProps {
   params: Promise<{ id: string }>;
@@ -44,10 +45,6 @@ export default function GoodByIdPage() {
     fetchGood();
   }, [id]);
 
-  if (loading) return <p>Завантаження товару...</p>;
-  if (error) return <p>❌ {error}</p>;
-  if (!good) return <p>Товар не знайдено.</p>;
-
   const StarRating = ({ rating }: { rating: number }) => {
     const stars = [];
 
@@ -75,7 +72,10 @@ export default function GoodByIdPage() {
 
     return <div className={css.stars}>{stars}</div>;
   };
-
+  if (loading) return <p>Завантаження товару...</p>;
+  if (error) return <p>❌ {error}</p>;
+  if (!good || !good.size || !good.characteristics)
+    return <p>Товар не знайдено.</p>;
   return (
     <section className={css.categoriesSection}>
       <div className={css.imageWrapper}>
