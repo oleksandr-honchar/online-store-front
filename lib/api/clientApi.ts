@@ -1,11 +1,11 @@
-import { Review } from '@/types/review';
-import { nextServer, ApiError } from './api';
-import type {
-  User,
-  RegisterRequest,
-  Category,
-  Good,
-} from '@/types/user';
+import {
+  fetchReviewsResponse,
+  Review,
+} from '@/types/review';
+import { nextServer, localApi, ApiError } from './api';
+import type { User, RegisterRequest } from '@/types/user';
+import { Category } from '@/types/category';
+import { GetGoodsParams, Good } from '@/types/goods';
 
 export const login = async (
   phone: string,
@@ -44,11 +44,11 @@ export const register = async (
     password: payload.password,
   };
   try {
-    const res = await nextServer.post(
+    const res = await localApi.post(
       '/auth/register',
       cleanPayload
     );
-    return res.data.user;
+    return res.data;
   } catch (err: any) {
     throw new Error(
       err.response?.data?.error ||
@@ -82,10 +82,11 @@ export const updateUserProfile = async (
   payload: Partial<User>
 ): Promise<User> => {
   try {
-    const { data } = await nextServer.patch<User>(
-      '/users/me',
+    const { data } = await localApi.patch<User>(
+      '/user/me',
       payload
     );
+
     return data;
   } catch (err) {
     const error = err as ApiError;
@@ -143,6 +144,42 @@ export const sendSubscription = async (email: string) => {
   }
 };
 
+export const fetchReviews = async (): Promise<Review[]> => {
+  try {
+    const response =
+      await nextServer.get<fetchReviewsResponse>(
+        '/feedbacks?perPage=10'
+      );
+    return response.data.feedbacks || [];
+  } catch (error) {
+    console.error('Error fetching reviews:', error);
+    throw error;
+  }
+};
+
+export const getGoodsbyFeedback = async (
+  params: GetGoodsParams = {}
+): Promise<Good[]> => {
+  try {
+    const { data } = await nextServer.get<{ data: Good[] }>(
+      '/goods',
+      { params }
+    );
+
+    const filteredGoods = data.data.filter(
+      good => (good.feedbackCount ?? 0) > 0
+    );
+
+    return filteredGoods;
+  } catch (err) {
+    const error = err as ApiError;
+    throw new Error(
+      error.response?.data?.error ||
+        'Не вдалося завантажити товари'
+    );
+  }
+};
+
 export const getGoodById = async (
   id: string
 ): Promise<Good> => {
@@ -157,26 +194,5 @@ export const getGoodById = async (
       error.response?.data?.error ||
         'Не вдалося отримати товар'
     );
-  }
-};
-
-interface fetchReviewsResponse {
-  page: number;
-  perPage: number;
-  totalFeedbacks: number;
-  totalPages: number;
-  feedbacks: Review[];
-}
-
-export const fetchReviews = async (): Promise<Review[]> => {
-  try {
-    const response =
-      await nextServer.get<fetchReviewsResponse>(
-        '/feedbacks?perPage=10'
-      );
-    return response.data.feedbacks || [];
-  } catch (error) {
-    console.error('Error fetching reviews:', error);
-    throw error;
   }
 };

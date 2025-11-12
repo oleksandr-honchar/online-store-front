@@ -20,39 +20,3 @@ export interface LoginRequest {
   phone: string;
   password: string;
 }
-
-export type Category = {
-  _id: string;
-  name: string;
-  image: string;
-  goodsCount?: number;
-};
-
-export type Feedback = {
-  _id: string;
-  author: string;
-  date: string;
-  description: string;
-  rate: number;
-  category: string;
-  goodId: string;
-};
-
-export type Good = {
-  _id: string;
-  name: string;
-  category: string;
-  image: string;
-  price: {
-    value: number;
-    currency: string;
-  };
-  size: string[];
-  description: string;
-  feedbacks: Feedback[];
-  prevDescription: string;
-  gender: string;
-  characteristics: string[];
-  feedbackCount?: number;
-  avgRating?: number;
-};
