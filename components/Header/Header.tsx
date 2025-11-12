@@ -4,25 +4,30 @@ import { useEffect, useState } from 'react';
 import css from './Header.module.css';
 import Link from 'next/link';
 import AuthNavigation from '@/components/AuthNavigation/AuthNavigation';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const pathname = usePathname();
+
+  const openMenu = () => setIsOpenMenu(true);
+  const closeMenu = () => setIsOpenMenu(false);
+
+  useEffect(() => {
+    closeMenu();
+  }, [pathname]);
 
   useEffect(() => {
     if (isOpenMenu) {
-      document.body.classList.add('noScroll');
+      document.body.classList.add(css.noScroll);
     } else {
-      document.body.classList.remove('noScroll');
+      document.body.classList.remove(css.noScroll);
     }
 
     return () => {
-      document.body.classList.remove('noScroll');
+      document.body.classList.remove(css.noScroll);
     };
   }, [isOpenMenu]);
-
-  const openMenu = () => setIsOpenMenu(true);
-
-  const closeMenu = () => setIsOpenMenu(false);
 
   const navClass = `${css.navMobile} ${isOpenMenu ? css.show : ''}`;
 
@@ -39,6 +44,7 @@ export default function Header() {
               <use href="/logo.svg"></use>
             </svg>
           </Link>
+
           <nav className={css.nav}>
             <ul className={css.listNav}>
               <li>
@@ -60,11 +66,12 @@ export default function Header() {
                 </Link>
               </li>
             </ul>
-            <AuthNavigation />
+            <AuthNavigation onLinkClick={closeMenu} />
           </nav>
         </div>
+
         <div className={css.toggle}>
-          {!isOpenMenu && (
+          {!isOpenMenu ? (
             <button
               type="button"
               onClick={openMenu}
@@ -78,8 +85,7 @@ export default function Header() {
                 <use href="/sprite.svg/#icon-mobile-menu"></use>
               </svg>
             </button>
-          )}
-          {isOpenMenu && (
+          ) : (
             <button
               type="button"
               onClick={closeMenu}
@@ -108,7 +114,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* {isOpenMenu && ( */}
       <nav className={navClass}>
         <ul className={css.listNavMobile}>
           <li>
@@ -139,9 +144,10 @@ export default function Header() {
             </Link>
           </li>
         </ul>
-        <AuthNavigation />
+
+        {/* 🔸 Передаємо onLinkClick, щоб кнопки у AuthNavigation теж закривали меню */}
+        <AuthNavigation onLinkClick={closeMenu} />
       </nav>
-      {/* )} */}
     </header>
   );
 }
