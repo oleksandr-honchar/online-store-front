@@ -51,6 +51,10 @@ export default function GoodsDetailsClient() {
     refetchOnMount: false,
   });
 
+  //   const [selectedSize, setSelectedSize] = useState<string>(
+  //     good.size?.[4] || ''
+  //   );
+
   if (isLoading) return <div>Loading...</div>;
   if (isError || !good)
     return <div>Error loading note.</div>;
@@ -149,13 +153,13 @@ export default function GoodsDetailsClient() {
           <div className={css.formSizeDiv}>
             <select
               id="size-select"
-              // value={selectedSize}
+              defaultValue={good.size?.[3] || ''}
               // onChange={e =>
               //   setSelectedSize(e.target.value)
               // }
               className={css.formSize}
             >
-              {good.size.map(size => (
+              {good.size?.map((size: string) => (
                 <option key={size} value={size}>
                   {size}
                 </option>
@@ -179,6 +183,7 @@ export default function GoodsDetailsClient() {
               <input
                 type="number"
                 id="quantity"
+                defaultValue="1"
                 // value={quantity}
                 min={1}
                 // onChange={e =>
@@ -199,77 +204,6 @@ export default function GoodsDetailsClient() {
             Безкоштовна доставка для замовлень від 1000 грн
           </p>
         </div>
-        {/* <div className={css.form}>
-          <Formik
-            initialValues={{
-              size: good.size[3],
-              quantity: 1,
-            }}
-            onSubmit={() => {}}
-          >
-            <Form>
-              <label
-                className={css.text}
-                htmlFor="size-select"
-              >
-                Розмір:
-              </label>
-              <div className={css.formSizeDiv}>
-                <Field
-                  className={css.formSize}
-                  as="select"
-                  id="size-select"
-                  name="size"
-
-                  // value={selectedSize}
-                  // onChange={handleSizeChange}
-                >
-                  {good.size.map(size => (
-                    <option key={size} value={size}>
-                      {size}
-                    </option>
-                  ))}
-                </Field>
-                <svg className={css.selectArrow}>
-                  <use href="/sprite.svg#icon-arrow-bottom" />
-                </svg>
-              </div>
-
-              <div className={css.formButtons}>
-                <button
-                  type="submit"
-                  className={css.buttonBasket}
-                  // onClick={handleAddToCart}
-                >
-                  Додати в кошик
-                </button>
-                <div className={css.formCount}>
-                  <Field
-                    type="number"
-                    id="quantity"
-                    name="quantity"
-                    // value={quantity}
-                    min={1}
-                    // onChange={handleQuantityChange}
-                    className={css.inputQuantity}
-                  />
-                </div>
-              </div>
-              <button
-                type="button"
-                className={css.buttonBuy}
-                // onClick={handleBuyNow}
-              >
-                Купити зараз
-              </button>
-              <p className={css.formText}>
-                Безкоштовна доставка для замовлень від 1000
-                грн
-              </p>
-            </Form>
-          </Formik>
-        </div> */}
-
         <div className={css.descriptionBlock}>
           <h3 className={css.descriptionTitle}>Опис</h3>
           <p className={css.descriptionText}>
@@ -282,14 +216,16 @@ export default function GoodsDetailsClient() {
             Основні характеристики:
           </h3>
           <ul className={css.characterList}>
-            {good.characteristics?.map(characteristic => (
-              <li
-                className={css.characterItem}
-                key={characteristic}
-              >
-                {characteristic}
-              </li>
-            ))}
+            {good.characteristics?.map(
+              (characteristic: string) => (
+                <li
+                  className={css.characterItem}
+                  key={characteristic}
+                >
+                  {characteristic}
+                </li>
+              )
+            )}
 
             <li className={css.characteristicItem}>
               <strong className={css.characteristicText}>
