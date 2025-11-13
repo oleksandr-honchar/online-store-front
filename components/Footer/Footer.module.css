@@ -1,9 +1,7 @@
-.footer {
-}
+s.footer {}
 
 .container {
   width: 100%;
-  max-width: 375px;
   padding: 48px 20px;
   margin: 0 auto;
   background: #c5e1a5;
@@ -18,17 +16,13 @@
   align-items: center;
 }
 
-/* containerFooterFirst */
 
 .containerFooterFirst {
   display: flex;
   flex-direction: column;
-  /* gap: 77px; */
-
   padding-bottom: 32px;
 }
 
-/* footerFirstPartFirst */
 
 .footerFirstPartFirst {
   display: flex;
@@ -84,7 +78,6 @@
   color: #9db484;
 }
 
-/* footerFirstPartSecond */
 
 .footerFirstPartSecond {
   display: flex;
@@ -208,7 +201,7 @@
     transform 0.3s ease;
 }
 
-.socialFooter a img {
+.socialFooter a svg {
   width: 24px;
   height: 24px;
   transition: transform 0.3s ease;
@@ -228,12 +221,12 @@
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 100px;
   background: rgba(0, 0, 0, 0.15);
-  outline: none; /* прибирає синє обведення браузера */
+  outline: none;
 }
 
-@media (max-width: 374px) {
+@media (min-width: 375px) {
   .container {
-    min-width: 320px;
+    max-width: 375px;
   }
 }
 
