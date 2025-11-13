@@ -59,6 +59,13 @@ export const updateUserProfile = async (
   return data;
 };
 
+export const refreshAccessToken = async (): Promise<{
+  accessToken: string;
+}> => {
+  const res = await nextServer.post('/auth/refresh');
+  return res.data;
+};
+
 export const checkSession = async (): Promise<{
   accessToken?: string;
 }> => {
