@@ -37,12 +37,13 @@ export default function BasketModal() {
   const handleBackdropClick = (
     e: React.MouseEvent<HTMLDivElement>
   ) => {
-    if (e.target === e.currentTarget) router.back();
+    if (e.target === e.currentTarget) handleClose();
   };
 
   const handleClose = () => {
     router.back();
   };
+
   const handleNavigate = (path: string) => {
     document.body.style.overflow = 'unset';
     router.push(path);
@@ -57,7 +58,7 @@ export default function BasketModal() {
       <div className={styles.modal}>
         <button
           className={styles.closeBtn}
-          onClick={() => router.back()}
+          onClick={handleClose}
           aria-label="Закрити кошик"
         >
           <svg className={styles.icon}>
