@@ -11,6 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useBasketStore } from '@/lib/store/basketStore';
 import CustomSelect from '@/components/CustomSelect/CustomSelect';
+import Loader from '@/components/Loader/Loader';
 
 const StarRating = ({ rating }: { rating: number }) => {
   const stars = [];
@@ -19,19 +20,19 @@ const StarRating = ({ rating }: { rating: number }) => {
     if (i <= rating) {
       stars.push(
         <svg key={i} className={css.svgPrice}>
-          <use xlinkHref="/sprite.svg#icon-icon-star-fill"></use>
+          <use href="/sprite.svg#icon-icon-star-fill"></use>
         </svg>
       );
     } else if (i - 0.5 <= rating) {
       stars.push(
         <svg key={i} className={css.svgPrice}>
-          <use xlinkHref="/sprite.svg#icon-icon-star-half-fill"></use>
+          <use href="/sprite.svg#icon-icon-star-half-fill"></use>
         </svg>
       );
     } else {
       stars.push(
         <svg key={i} className={css.svgPrice}>
-          <use xlinkHref="/sprite.svg#icon-star-no-fill"></use>
+          <use href="/sprite.svg#icon-star-no-fill"></use>
         </svg>
       );
     }
@@ -64,7 +65,7 @@ export default function GoodsDetailsClient() {
   const [selectedSize, setSelectedSize] = useState('');
   const [quantity, setQuantity] = useState(1);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (isError || !good)
     return <div>Error loading note.</div>;
 
@@ -105,7 +106,6 @@ export default function GoodsDetailsClient() {
     }
     clearBasket();
     addToBasket(basketItem);
-    // router.push('/basket');
     router.push('/orders');
   };
 
@@ -170,25 +170,6 @@ export default function GoodsDetailsClient() {
           <label className={css.text} htmlFor="size-select">
             Розмір:
           </label>
-          {/* <div className={css.formSizeDiv}>
-            <select
-              id="size-select"
-              value={selectedSize}
-              onChange={e =>
-                setSelectedSize(e.target.value)
-              }
-              className={css.formSize}
-            >
-              {good.size?.map((size: string) => (
-                <option key={size} value={size}>
-                  {size}
-                </option>
-              ))}
-            </select>
-            <svg className={css.selectArrow}>
-              <use href="/sprite.svg#icon-arrow-bottom" />
-            </svg>
-          </div> */}
 
           <div className={css.formSizeDiv}>
             <CustomSelect
@@ -209,7 +190,6 @@ export default function GoodsDetailsClient() {
             </button>
             <div className={css.formCount}>
               <input
-                type="number"
                 id="quantity"
                 value={quantity}
                 min={1}

@@ -48,17 +48,17 @@
   overflow: hidden;
   gap: 4px;
 }
+
 .link {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 14px;
-
-  /* line-height: 21px; */
   line-height: 1.5;
 
   color: #000;
   white-space: nowrap;
 }
+
 .link:last-child {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -66,12 +66,14 @@
   flex: 1;
   min-width: 0;
 }
+
 .link:last-child a {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   display: block;
 }
+
 .svg {
   width: 5px;
   height: 8px;
@@ -79,9 +81,11 @@
   stroke: black;
   stroke-width: 0.666667;
 }
+
 .list li:last-child {
   font-weight: 600;
 }
+
 .titleDiv {
   padding-bottom: 24px;
   display: flex;
@@ -97,8 +101,6 @@
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 400;
   font-size: 32px;
-
-  /* line-height: 38px; */
   line-height: 1.2;
   letter-spacing: -0.01em;
   color: #000;
@@ -110,12 +112,11 @@
   display: flex;
   align-items: center;
 }
+
 .textTitel {
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 400;
   font-size: 20px;
-
-  /* line-height: 28px; */
   line-height: 1.4;
   letter-spacing: -0.01em;
   color: #000;
@@ -129,22 +130,26 @@
   color: black;
   opacity: 0.2;
 }
+
 .svgPrice {
   width: 16px;
   height: 16px;
   fill: black;
 }
+
 .rating {
   display: flex;
   gap: 4px;
   text-align: center;
   flex-wrap: nowrap;
 }
+
 .stars {
   display: flex;
   align-items: center;
   gap: 4px;
 }
+
 .ratingText {
   display: flex;
   gap: 8px;
@@ -152,8 +157,6 @@
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 14px;
-
-  /* line-height: 21px; */
   line-height: 1.5;
   text-align: center;
   color: #000;
@@ -170,8 +173,6 @@
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 16px;
-
-  /* line-height: 24px; */
   line-height: 1.5;
   color: #000;
   padding-bottom: 24px;
@@ -184,6 +185,7 @@
   display: inline-block;
   width: 100%;
 }
+
 .formSize {
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 16px;
@@ -195,8 +197,6 @@
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 16px;
-
-  /* line-height: 24px; */
   line-height: 1.5;
   color: #000;
 
@@ -231,6 +231,7 @@
   color: #000;
   outline: none;
 }
+
 .formSize:active,
 .inputQuantity:active,
 .buttonBuy:active,
@@ -242,11 +243,13 @@
 
   outline: none;
 }
+
 .formButtons {
   display: flex;
   gap: 16px;
   padding-bottom: 20px;
 }
+
 .buttonBasket {
   display: flex;
   border: 1px solid #c5e1a5;
@@ -278,6 +281,7 @@
   background: #3b4331;
   color: #fff;
 }
+
 .inputQuantity {
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 16px;
@@ -286,7 +290,9 @@
   max-width: 64px;
   height: 40px;
   background: rgba(255, 255, 255, 0);
+  color: #000;
 }
+
 .buttonBuy {
   display: flex;
   border: 1px solid rgba(255, 255, 255, 0);
@@ -302,16 +308,14 @@
   font-size: 16px;
   justify-content: center;
   align-items: center;
-  /* line-height: 24px; */
   line-height: 1.5;
   color: #000;
 }
+
 .formText {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 12px;
-
-  /* line-height: 18px; */
   line-height: 1.5;
   text-align: center;
   color: #000;
@@ -319,15 +323,11 @@
   padding-bottom: 32px;
 }
 
-.descriptionBlock {
-}
 
 .descriptionTitle {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 16px;
-
-  /* line-height: 24px; */
   line-height: 1.5;
   color: #000;
   padding-bottom: 32px;
@@ -337,36 +337,34 @@
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 16px;
-
-  /* line-height: 24px; */
   line-height: 1.5;
   color: #000;
   white-space: pre-line;
 }
+
 .characterList {
   display: block;
   padding-left: 24px;
 }
+
 .characterTitel {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 16px;
-
-  /* line-height: 24px; */
   line-height: 1.5;
   color: #000;
   padding-top: 16px;
   padding-bottom: 4px;
 }
+
 .characterItem {
   padding-bottom: 4px;
 }
+
 .characteristicText {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 16px;
-
-  /* line-height: 24px; */
   line-height: 1.5;
   color: #000;
   white-space: pre-line;
@@ -382,6 +380,7 @@
     display: flex;
     gap: 32px;
   }
+
   .imageWrapper {
     max-width: 336px;
     aspect-ratio: 336 / 358;
@@ -406,6 +405,7 @@
     padding-top: 112px;
     padding-bottom: 112px;
   }
+
   .imageWrapper {
     max-width: 640px;
     aspect-ratio: 640 / 682;
@@ -423,9 +423,11 @@
   .formSize {
     max-width: 640px;
   }
+
   .buttonBasket {
     max-width: 560px;
   }
+
   .buttonBuy {
     max-width: 640px;
   }
