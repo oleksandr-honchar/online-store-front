@@ -8,6 +8,7 @@ import type { User, RegisterRequest } from '@/types/user';
 import { Category } from '@/types/category';
 import { GetGoodsParams, Good } from '@/types/goods';
 import { log } from 'console';
+import { param } from 'framer-motion/client';
 
 export const login = async (
   phone: string,
@@ -103,6 +104,17 @@ export const fetchReviews = async (): Promise<Review[]> => {
   const response =
     await nextServer.get<fetchReviewsResponse>(
       '/feedbacks'
+    );
+  console.log(response.data.feedbacks);
+  return response.data.feedbacks || [];
+};
+
+export const fetchReviewsById = async (
+  id: string
+): Promise<Review[]> => {
+  const response =
+    await nextServer.get<fetchReviewsResponse>(
+      `/feedbacks/${id}`
     );
   console.log(response.data.feedbacks);
   return response.data.feedbacks || [];

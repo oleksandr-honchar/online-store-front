@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import { useBasketStore } from '@/lib/store/basketStore';
 import CustomSelect from '@/components/CustomSelect/CustomSelect';
 import Loader from '@/components/Loader/Loader';
+import GoodReviews from '@/components/GoodReviews/GoodReviews';
 
 const StarRating = ({ rating }: { rating: number }) => {
   const stars = [];
@@ -244,6 +245,7 @@ export default function GoodsDetailsClient() {
           </ul>
         </div>
       </div>
+      <GoodReviews id={id} />
     </section>
   );
 }

@@ -8,8 +8,15 @@ import { Keyboard, A11y } from 'swiper/modules';
 import Link from 'next/link';
 import css from './GoodReviews.module.css';
 import { Review } from '@/types/review';
-import { fetchReviews } from '@/lib/api/clientApi';
+import {
+  fetchReviews,
+  fetchReviewsById,
+} from '@/lib/api/clientApi';
 import Loader from '../Loader/Loader';
+
+interface Props {
+  id: string;
+}
 
 const StarRating = ({ rating }: { rating: number }) => {
   const stars = [];
@@ -24,13 +31,13 @@ const StarRating = ({ rating }: { rating: number }) => {
     } else if (i - 0.5 <= rating) {
       stars.push(
         <svg key={i} className={css.star}>
-          <use xlinkHref="sprite.svg#icon-icon-star-half-fill"></use>
+          <use href="sprite.svg#icon-icon-star-half-fill"></use>
         </svg>
       );
     } else {
       stars.push(
         <svg key={i} className={css.star}>
-          <use xlinkHref="sprite.svg#icon-star-no-fill"></use>
+          <use href="sprite.svg#icon-star-no-fill"></use>
         </svg>
       );
     }
@@ -39,18 +46,18 @@ const StarRating = ({ rating }: { rating: number }) => {
   return <div className={css.rating}>{stars}</div>;
 };
 
-export default function GoodReviews() {
-  // const {
-  //   data = [],
-  //   error,
-  //   isLoading,
-  //   isError,
-  // } = useQuery<Review[]>({
-  //   queryKey: ['reviews'],
-  //   queryFn: fetchReviews,
-  // });
+export default function GoodReviews({ id }: Props) {
+  const {
+    data = [],
+    error,
+    isLoading,
+    isError,
+  } = useQuery<Review[]>({
+    queryKey: ['reviews', id],
+    queryFn: () => fetchReviewsById(id),
+  });
 
-  // const reviews = Array.isArray(data) ? data : [];
+  const reviews = Array.isArray(data) ? data : [];
   const swiperRef = useRef<any>(null);
 
   const [isBeginning, setIsBeginning] = useState(true);
@@ -75,12 +82,12 @@ export default function GoodReviews() {
     }
   };
 
-  // if (isLoading) {
-  //   <Loader />;
-  // }
-  // if (isError) {
-  //   return <p>Помилка: {(error as Error).message}</p>;
-  // }
+  if (isLoading) {
+    <Loader />;
+  }
+  if (isError) {
+    return <p>Помилка: {(error as Error).message}</p>;
+  }
 
   return (
     <>
@@ -111,31 +118,25 @@ export default function GoodReviews() {
             }}
             a11y={{ enabled: true }}
           >
-            {/* {reviews.map(review => ( */}
-            <SwiperSlide
-            // key={review._id}
-            >
-              <ul>
-                <li className={css.listItem}>
-                  <div className={css.descContainer}>
-                    {/* <StarRating rating={review.rate} /> */}
-                    <p className={css.text}>
-                      {/* {review.description} */}
-                      "Футболки Clothica - це справжня
-                      знахідка для мене! Я в захваті від
-                      якості та дизайну."
-                    </p>
-                  </div>
-                  <div className={css.authorContainer}>
-                    <h3 className={css.author}>
-                      Олена Коваль
-                      {/* {review.author} */}
-                    </h3>
-                  </div>
-                </li>
-              </ul>
-            </SwiperSlide>
-            {/* ))} */}
+            {reviews.map(review => (
+              <SwiperSlide key={review._id}>
+                <ul>
+                  <li className={css.listItem}>
+                    <div className={css.descContainer}>
+                      <StarRating rating={review.rate} />
+                      <p className={css.text}>
+                        {review.description}
+                      </p>
+                    </div>
+                    <div className={css.authorContainer}>
+                      <h3 className={css.author}>
+                        {review.author}
+                      </h3>
+                    </div>
+                  </li>
+                </ul>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
 
