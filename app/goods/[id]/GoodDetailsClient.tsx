@@ -10,6 +10,7 @@ import { Good } from '@/types/goods';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useBasketStore } from '@/lib/store/basketStore';
+import CustomSelect from '@/components/CustomSelect/CustomSelect';
 
 const StarRating = ({ rating }: { rating: number }) => {
   const stars = [];
@@ -109,8 +110,6 @@ export default function GoodsDetailsClient() {
     // router.push('/checkout');
   };
 
-  //   clearCart();
-
   if (!good || !good.size || good.size.length === 0) {
     return <p>Розміри товару недоступні.</p>;
   }
@@ -172,7 +171,7 @@ export default function GoodsDetailsClient() {
           <label className={css.text} htmlFor="size-select">
             Розмір:
           </label>
-          <div className={css.formSizeDiv}>
+          {/* <div className={css.formSizeDiv}>
             <select
               id="size-select"
               value={selectedSize}
@@ -190,6 +189,14 @@ export default function GoodsDetailsClient() {
             <svg className={css.selectArrow}>
               <use href="/sprite.svg#icon-arrow-bottom" />
             </svg>
+          </div> */}
+
+          <div className={css.formSizeDiv}>
+            <CustomSelect
+              value={selectedSize}
+              options={good.size}
+              onChange={setSelectedSize}
+            />
           </div>
 
           <div className={css.formButtons}>
