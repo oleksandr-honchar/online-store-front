@@ -1,118 +1,90 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
-import styles from '@/app/order/createOrder.module.css';
+import styles from '@/app/orders/createOrder.module.css';
+import { useBasketStore, BasketItem } from '@/lib/store/basketStore';
 
-export type GoodsItem = {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-  rating: number;
-  reviews: number;
-};
+const GoodsOrderList = () => {
+  const { items, updateQuantity, removeFromBasket } = useBasketStore();
 
-type Props = {
-  items: GoodsItem[];
-};
-
-const GoodsOrderList = ({ items }: Props) => {
-  const [goods, setGoods] = useState(items);
-
-  const handleQuantityChange = (
-    id: number,
-    quantity: number
-  ) => {
-    if (quantity < 1) return;
-    setGoods(prev =>
-      prev.map(item =>
-        item.id === id ? { ...item, quantity } : item
-      )
-    );
-  };
-
-  const handleRemove = (id: number) => {
-    setGoods(prev => prev.filter(item => item.id !== id));
-  };
-
-  const delivery = 70;
-  const subtotal = goods.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+  const delivery = items.length > 0 ? 70 : 0;
+  const subtotal = items.reduce(
+    (sum, item) => sum + item.price.value * item.quantity,
     0
   );
   const total = subtotal + delivery;
+
+  const handleQuantityChange = (id: string, quantity: number) => {
+    if (quantity < 1) return;
+    updateQuantity(id, quantity);
+  };
+
+  const handleRemove = (id: string) => {
+    removeFromBasket(id);
+  };
 
   return (
     <div className={styles.orderProducts}>
       <h2 className={styles.blockTitle}>Товари</h2>
 
       <div className={styles.productsList}>
-        {goods.map(item => (
-          <div key={item.id} className={styles.productCard}>
-            <Image
-              className={styles.productImage}
-              src={item.image}
-              alt={item.name}
-              width={70}
-              height={70}
-            />
+        {items.map(item => (
+          <div key={item._id} className={styles.productCard}>
+            {item.image && (
+              <Image
+                className={styles.productImage}
+                src={item.image}
+                alt={item.name}
+                width={70}
+                height={70}
+              />
+            )}
 
             <div className={styles.productInfo}>
               <div className={styles.productText}>
-                <p className={styles.productName}>
-                  {item.name}
-                </p>
+                <p className={styles.productName}>{item.name}</p>
 
                 <div className={styles.productMeta}>
-                  <div className={styles.productMeta}>
-                    <div className={styles.ratingGroup}>
-                      <svg width="14" height="14">
-                        <use href="/sprite.svg#icon-icon-star-fill" />
-                      </svg>
-                      <span
-                        className={styles.productRating}
-                      >
-                        {item.rating}
-                      </span>
-                    </div>
+                  <div className={styles.ratingGroup}>
+                    <svg width="14" height="14">
+                      <use href="/sprite.svg#icon-icon-star-fill" />
+                    </svg>
+                    <span className={styles.productRating}>
+                      {item.avgRating ?? 0}
+                    </span>
+                  </div>
 
-                    <div className={styles.reviewsGroup}>
-                      <svg width="14" height="14">
-                        <use href="/sprite.svg#icon-comment-section" />
-                      </svg>
-                      <span
-                        className={styles.productReviews}
-                      >
-                        {item.reviews}
-                      </span>
-                    </div>
+                  <div className={styles.reviewsGroup}>
+                    <svg width="14" height="14">
+                      <use href="/sprite.svg#icon-comment-section" />
+                    </svg>
+                    <span className={styles.productReviews}>
+                      {item.feedbackCount ?? 0}
+                    </span>
                   </div>
                 </div>
               </div>
 
               <div className={styles.productRight}>
                 <p className={styles.productPrice}>
-                  {(item.price * item.quantity).toFixed(2)}{' '}
-                  грн
+                  {(item.price.value * item.quantity).toFixed(2)} грн
                 </p>
 
                 <div className={styles.quantityButtonRow}>
                   <input
                     type="number"
-                    min="1"
+                    min={1}
                     value={item.quantity}
                     onChange={e =>
                       handleQuantityChange(
-                        item.id,
+                        item._id,
                         Number(e.target.value)
                       )
                     }
                     className={styles.quantityInput}
                   />
                   <button
-                    onClick={() => handleRemove(item.id)}
+                    onClick={() => handleRemove(item._id)}
                     aria-label="Видалити товар"
                     className={styles.removeButton}
                   >

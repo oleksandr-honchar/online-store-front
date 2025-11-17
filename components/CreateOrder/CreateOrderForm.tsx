@@ -3,7 +3,19 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useRouter } from 'next/navigation';
-import styles from '@/app/order/createOrder.module.css';
+import styles from '@/app/orders/createOrder.module.css';
+import { useMutation } from "@tanstack/react-query";
+import { createOrder } from "@/lib/api/clientApi";
+import { useBasketStore } from "@/lib/store/basketStore";
+
+const initialValues = {
+  firstName: "",
+  lastName: "",
+  phone: "",
+  city: "",
+  npBranch: "",
+  comment: "",
+};
 
 const OrderSchema = Yup.object({
   firstName: Yup.string()
@@ -25,21 +37,28 @@ const OrderSchema = Yup.object({
 const CreateOrderForm = () => {
   const router = useRouter();
 
-  const initialValues = {
-    firstName: '',
-    lastName: '',
-    phone: '',
-    city: '',
-    npBranch: '',
-    comment: '',
-  };
+  const items = useBasketStore(state => state.items);
+  const clearBasket = useBasketStore(state => state.clearBasket);
 
-  const handleSubmit = async (
-    values: typeof initialValues
-  ) => {
-    await new Promise(res => setTimeout(res, 1000));
-    console.log('Order submitted', values);
-    router.push('/goods');
+  const mutation = useMutation({
+    mutationFn: createOrder,
+    onSuccess: () => {
+      clearBasket();
+      router.push("/orders/success");
+    },
+  });
+
+  const handleSubmit = async (values: typeof initialValues) => {
+    const payload = {
+      ...values,
+      items,
+      total: items.reduce(
+        (sum, item) => sum + item.price.value * item.quantity,
+        0
+      ),
+    };
+
+    mutation.mutate(payload);
   };
 
   return (

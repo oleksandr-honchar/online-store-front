@@ -146,3 +146,13 @@ export const getGoodById = async (id: string) => {
   const res = await nextServer.get(`/goods/${id}`);
   return res.data;
 };
+
+export const createOrder = async (payload: any) => {
+  const { data } = await nextServer.post("/orders", payload);
+  return data;
+};
+
+export const getMyOrders = async () => {
+  const { data } = await nextServer.get("/orders");
+  return data;
+};
