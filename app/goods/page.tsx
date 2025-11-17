@@ -1,2 +1,2 @@
-import GoodsPage from './filter/[...slug]/page'; 
+import GoodsPage from './filter/[...slug]/page';
 export default GoodsPage;
