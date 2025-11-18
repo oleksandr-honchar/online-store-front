@@ -18,9 +18,7 @@ export interface fetchReviewsResponse {
 }
 export interface ReviewRequestBody {
   goodId: string;
-  category: string;
   author: string;
   rate: number;
   description: string;
-  date: string;
 }

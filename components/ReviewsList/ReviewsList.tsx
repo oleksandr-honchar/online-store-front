@@ -41,12 +41,14 @@ type ReviewsListProps = {
   id?: string;
   title?: string;
   showAddButton?: boolean;
+  onOpenModal?: () => void;
 };
 
 const ReviewsList = ({
   id,
   title = 'Останні відгуки',
   showAddButton = false,
+  onOpenModal,
 }: ReviewsListProps) => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -94,8 +96,11 @@ const ReviewsList = ({
       <div className={css.container}>
         <h2 className={css.title}>{title}</h2>
         {showAddButton && !id && (
-          <button className={css.addButton}>
-            Додати відгук
+          <button
+            className={css.ButtonGreen}
+            onClick={onOpenModal}
+          >
+            Залишити відгук
           </button>
         )}
         <p>Відгуків поки немає</p>
@@ -108,12 +113,17 @@ const ReviewsList = ({
 
   return (
     <div className={css.container}>
-      <h2 className={css.title}>{title}</h2>
-      {showAddButton && !id && (
-        <button className={css.addButton}>
-          Додати відгук
-        </button>
-      )}
+      <div className={css.buttonWrapper}>
+        <h2 className={css.title}>{title}</h2>
+        {showAddButton && !id && (
+          <button
+            className={`${css.addButton} ButtonGreen`}
+            onClick={onOpenModal}
+          >
+            Залишити відгук
+          </button>
+        )}
+      </div>
 
       <div className={css.list}>
         <Swiper

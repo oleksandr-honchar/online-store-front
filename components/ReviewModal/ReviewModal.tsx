@@ -1,24 +1,22 @@
 'use client';
 
+import { createReview } from '@/lib/api/clientApi';
+import { ReviewRequestBody } from '@/types/review';
 import {
-  ErrorMessage,
-  Field,
-  Form,
-  Formik,
-  FormikHelpers,
-} from 'formik';
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { StarRating } from 'react-flexible-star-rating';
 import { toast } from 'react-hot-toast';
 import * as Yup from 'yup';
 import css from './ReviewModal.module.css';
-import { ReviewRequestBody } from '@/types/review';
 
 interface ModalProps {
   onClose: () => void;
   goodId: string;
-  category: string;
 }
 
 interface FormValues {
@@ -49,35 +47,36 @@ const ReviewSchema = Yup.object().shape({
 export default function ReviewModal({
   onClose,
   goodId,
-  category,
 }: ModalProps) {
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (
-    values: FormValues,
-    actions: FormikHelpers<FormValues>
-  ) => {
+  const queryClient = useQueryClient();
+
+  const { mutate: createMutation } = useMutation({
+    mutationFn: createReview,
+    onSuccess() {
+      queryClient.invalidateQueries({
+        queryKey: ['reviews', goodId],
+      });
+      toast.success('Ваш відгук відправлено!');
+      onClose();
+    },
+    onError() {
+      toast.error('Щось пішло не так, спробуйте ще раз');
+    },
+  });
+
+  const handleSubmit = async (values: FormValues) => {
     const payload: ReviewRequestBody = {
       goodId,
-      category,
       author: values.name,
       rate: values.rating,
       description: values.review,
-      date: new Date().toISOString().split('T')[0],
     };
-    console.log(payload);
 
-    try {
-      setLoading(true);
-      // const response;
-      toast.success('Ваш відгук відправлено!');
-      actions.resetForm();
-      onClose();
-    } catch (err: any) {
-      toast.error(err.message);
-    } finally {
-      setLoading(false);
-    }
+    setLoading(true);
+    createMutation(payload);
+    setLoading(false);
   };
 
   const handleBackdrop = (
@@ -89,9 +88,16 @@ export default function ReviewModal({
   };
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    const scrollbarWidth =
+      window.innerWidth -
+      document.documentElement.clientWidth;
+
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+
     return () => {
-      document.body.style.overflow = 'auto';
+      document.documentElement.style.overflow = 'auto';
+      document.body.style.paddingRight = '0';
     };
   }, []);
 
