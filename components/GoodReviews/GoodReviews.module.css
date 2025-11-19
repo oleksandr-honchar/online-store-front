@@ -34,6 +34,19 @@
   border-radius: 100px;
   padding: 6px 12px;
   background-color: #c5e1a5;
+  transition: all 0.3s ease;
+}
+
+.btnSend:hover,
+.btnSend:focus {
+  border: 1px solid #4e5a42;
+  background: #9db484;
+}
+
+.btnSend:active {
+  color: #fff;
+  border: 1px solid #c5e1a5;
+  background: #3b4331;
 }
 
 .containerBtnSend {
