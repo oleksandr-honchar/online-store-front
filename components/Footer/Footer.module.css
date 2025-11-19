@@ -1,5 +1,4 @@
-s.footer {
-}
+s.footer {}
 
 .container {
   width: 100%;
@@ -124,6 +123,7 @@ s.footer {
   width: 193px;
   height: 40px;
   background: rgba(255, 255, 255, 0);
+  color: #000;
 }
 
 .fieldInput::placeholder {
