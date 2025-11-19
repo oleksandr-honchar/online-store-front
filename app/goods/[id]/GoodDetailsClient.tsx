@@ -13,6 +13,52 @@ import CustomSelect from '@/components/CustomSelect/CustomSelect';
 import Loader from '@/components/Loader/Loader';
 import ReviewsList from '@/components/ReviewsList/ReviewsList';
 import ReviewModal from '@/components/ReviewModal/ReviewModal';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const good = await getGoodById(params.id);
+
+  if (!good) {
+    return {
+      title: 'Товар не знайдено | Clothica',
+      description:
+        'Даний товар не знайдено у нашому каталозі.',
+    };
+  }
+
+  return {
+    title: `${good.name} | Clothica`,
+    description:
+      good.prevDescription ||
+      good.description ||
+      'Clothica – стильний одяг онлайн',
+    openGraph: {
+      title: `${good.name} | Clothica`,
+      description: good.prevDescription || good.description,
+      images: [
+        {
+          url: good.image,
+          width: 1200,
+          height: 630,
+          alt: good.name,
+        },
+      ],
+      type: 'website',
+      locale: 'uk_UA',
+      url: `https://clothica-go-it-prod-team-2-front.vercel.app/goods/${params.id}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${good.name} | Clothica`,
+      description: good.prevDescription || good.description,
+      images: [good.image],
+    },
+  };
+}
 
 const StarRating = ({ rating }: { rating: number }) => {
   const stars = [];
