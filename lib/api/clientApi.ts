@@ -7,8 +7,6 @@ import { nextServer } from './api';
 import type { User, RegisterRequest } from '@/types/user';
 import { Category } from '@/types/category';
 import { GetGoodsParams, Good } from '@/types/goods';
-import { log } from 'console';
-import { param } from 'framer-motion/client';
 
 export const login = async (
   phone: string,
@@ -152,3 +150,4 @@ export const getGoodById = async (id: string) => {
   const res = await nextServer.get(`/goods/${id}`);
   return res.data;
 };
+

@@ -96,12 +96,6 @@ const handleSubmit = async (
           {({ isSubmitting }) => (
             <Form className={css.form}>
 
-              {/* ПРИХОВАНА ГРУПА - для вирівнювання з формою реєстрації */}
-              {/* <div className={css.formGroupHidden} aria-hidden="true">
-                <label className={css.label}>Placeholder</label>
-                <input type="text" className={css.input} disabled />
-              </div> */}
-
               <div className={css.formGroup}>
                 <label htmlFor="phone" className={css.label}>
                   Номер телефону*
@@ -110,7 +104,7 @@ const handleSubmit = async (
                   id="phone"
                   name="phone"
                   type="tel"
-                  placeholder="+38 (0__) ___-__-__"
+                  placeholder="380_________"
                   className={css.input}
                 />
                 <ErrorMessage name="phone" component="span" className={css.errorText} />
