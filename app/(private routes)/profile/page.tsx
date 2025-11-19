@@ -22,7 +22,11 @@ import PersonalInfoForm from '@/components/PersonalInfoForm/PersonalInfoForm';
 export const userSchema = Yup.object({
   firstName: Yup.string().required("Ім'я обов'язкове"),
   lastName: Yup.string(),
-  phone: Yup.number()
+  phone: Yup.string()
+    .matches(
+      /^\+?3?8?(0\d{9})$/,
+      'Некоректний номер телефону'
+    )
     .typeError('Номер телефону має бути числом')
     .required("Телефон обов'язковий"),
   email: Yup.string().email('Некоректний email'),
