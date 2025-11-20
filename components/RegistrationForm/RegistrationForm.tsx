@@ -118,7 +118,7 @@ const handleSubmit = async (
                   id="phone"
                   name="phone"
                   type="tel"
-                  placeholder="+38 (0__) ___-__-__"
+                  placeholder="380_________"
                   className={css.input}
                 />
                 <ErrorMessage name="phone" component="span" className={css.errorText} />
