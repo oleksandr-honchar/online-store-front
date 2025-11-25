@@ -1,278 +1,55 @@
-Clothica — Інтернет-магазин одягу
-
-Багатосторінковий застосунок на Next.js 15
-
-Опис проєкту
-
-Clothica — це сучасний інтернет-магазин одягу, створений відповідно до макету та вимог GoIT.
-Мета проєкту — надати користувачу зручний, швидкий та інтуїтивний інтерфейс для перегляду товарів, фільтрації, оформлення замовлень і взаємодії з особистим кабінетом.
-
-Проєкт реалізований як MVP, з адаптивною версткою, оптимізованими запитами, приватними маршрутами, валідованими формами та повторно використовуваними UI-компонентами.
-
-✨ Функціонал
-🔐 Маршрутизація (Next.js App Router)
-
-Публічні та приватні сторінки
-
-Перевірка авторизації на рівні компонентів
-
-Динамічні маршрути (/goods/[goodId])
-
-🧩 Глобальний стан — Zustand
-
-Глобальні сто́ри (авторизація, кошик, фільтри)
-
-Селектори, оптимізація ререндерів
-
-📡 Отримання даних
-
-Запити до бекенду
-
-React Query: кешування, інвалідація, refetch у фоні
-
-Локальні та глобальні лоадери
-
-🛠 Форми
-
-Formik
-
-Yup (валідація)
-
-Повідомлення про помилки через toast
-
-🔔 UI/UX
-
-Інтерактивні елементи з hover-ефектами
-
-Контентні зображення
-
-SVG-іконки (Logo, соцмережі)
-
-Mobile First + responsive
-
-Фавікон з UI KIT
-
-📱 Адаптивність
-
-Точки перелому:
-
-mobile: гумова від 320px, адаптив з 375px
-
-tablet: ≥ 768px
-
-desktop: ≥ 1440px
-
-Стилізація через CSS Modules, нормалізація — modern-normalize.
-
-🎞 Слайдери
-
-Swiper.js
-
-Гортання мишею, клавіатурою та swipe
-
-Динамічне підвантаження елементів
-
-Автоблокування стрілок при кінці списку
-
-📂 Сторінки
-Route	Опис
-/	Головна
-/categories	Список категорій
-/goods	Список товарів
-/goods/[goodId]	Сторінка товару
-/basket	Кошик
-/order	Оформлення замовлення
-/profile	Кабінет користувача
-/auth/register	Реєстрація
-/auth/login	Вхід
-🧱 Головні компоненти
-Layout
-
-Header, main, Footer
-
-Рендерить вкладений контент
-
-Header
-
-Logo (svg)
-
-Навігація за ролями (авторизований / ні)
-
-Бургер-меню з блокуванням скролу
-
-Плавна анімація відкриття
-
-CategoriesList
-
-Список категорій через <ul>
-
-Контентні зображення
-
-Серверна пагінація
-
-CategoriesFilter
-
-Категорії
-
-Розміри
-
-Колір
-
-Стать
-
-Індикація «показано Х з Y»
-
-Кнопка «Очистити»
-
-GoodsList
-
-Відображення товарів
-
-Серверна пагінація (Показати більше)
-
-Обробка пустих результатів через MessageNoInfo
-
-GoodInfo
-
-Фото, назва, рейтинг, ціна
-
-Кнопка «Детальніше» → /goods/[goodId]
-
-GoodsOrderList
-
-Товари в кошику
-
-Інформаційний блок (підсумок, доставка, всього)
-
-MessageNoInfo
-
-Універсальний компонент
-
-Налаштовуваний текст і кнопка
-
-Перенаправлення на /goods або /categories
-
-ReviewsList
-
-Слайдер відгуків
-
-Динамічне підвантаження
-
-Блокування стрілок при кінці
-
-Footer
-
-Logo
-
-Якірні посилання
-
-Форма підписки з pattern-валідацією
-
-Соцмережі (svg)
-
-© 2025 Clothica
-
-🏠 Головна сторінка (/)
-Hero
-
-Заголовок “Знайди свій стиль з Clothica вже сьогодні!”
-
-Опис
-
-Кнопки-якорі до секцій
-
-Контентне зображення
-
-Style
-
-Три картки переваг
-
-Контентні іконки
-
-Список <ul>
-
-PopularCategories
-
-Слайдер категорій
-
-Кнопка «Всі категорії»
-
-PopularGoods
-
-Слайдер товарів
-
-Кнопка «Всі товари»
-
-LastReviews
-
-Слайдер ReviewsList
-
-🛒 Категорії (/categories)
-
-Заголовок «Категорії»
-
-6 карток на desktop, 4 на tablet/mobile
-
-Серверна пагінація → «Показати більше»
-
-🛍 Товари (/goods)
-
-Заголовок (змінюється залежно від фільтру)
-
-Фільтри + GoodsList
-
-Серверна пагінація
-
-Обробка пустих результатів
-
-📦 Товар (/goods/[goodId])
-
-GoodForPurchase (детальна інформація)
-
-GoodReviews (відгуки)
-
-🔧 Технології
-Frontend
-
-Next.js 15 (App Router)
-
-React 18
-
-TypeScript
-
-Zustand
-
-React Query
-
-Formik + Yup
-
-Swiper.js
-
-CSS Modules
-
-modern-normalize
-
-react-hot-toast
-
-Prettier
-
-🚀 Як запустити проєкт
-1. Клонувати репозиторій
-git clone https://github.com/your-username/Clothica.git
-cd Clothica
-
-2. Встановити залежності
+# Clothica — Online Clothing Store
+
+Full-stack e-commerce platform for clothing, developed as a team project during the GoIT Fullstack course. Clothica provides a modern, responsive interface for browsing products, filtering, placing orders, and managing user accounts.
+
+## Live Demo
+- **Frontend live:** [Clothica Frontend](https://clothica-go-it-prod-team-2-front.vercel.app/)
+- **Backend API docs:** [Clothica Backend Documentation](https://clothica-go-it-prod-team-2-back.onrender.com/api/docs/)
+
+## Repositories
+- **Frontend:** [GitHub](https://github.com/ArtemNyow/Clothica-Go-IT-prod-team-2-Front)  
+- **Backend:** [GitHub](https://github.com/ArtemNyow/Clothica-Go-IT-prod-team-2-Back)
+
+## Role
+Team Lead / Full-stack Developer — coordinated front-end and back-end development, led the team, ensured integration, optimized API requests, and maintained code quality.
+
+## Team Members
+- Artem Lykhatskyi (Team Lead / Full-stack Developer)  
+- Olha Khurtenko  
+- Vitalii Kalamuniak  
+- Ivashchenko Bohdan  
+- Yana Khovbosha  
+- Yana Savovska  
+- Dmytro Basamyhin  
+- Artem Pobehailo  
+- Anna Bohriakova  
+- Korotchenko Maksym  
+- Oleksandr Honchar  
+- Roman Garelchenkov
+- Liubov Nesterchuk (Backend)  
+- Vladyslav Putinets (Backend)  
+
+## Features
+- **Routing:** Public and private pages with Next.js App Router, dynamic routes (`/goods/[goodId]`)
+- **State Management:** Zustand for global stores (auth, cart, filters), optimized selectors
+- **Data Fetching:** Backend integration, React Query for caching, invalidation, background refetch
+- **Forms & Validation:** Formik + Yup, toast notifications for errors
+- **UI/UX:** Responsive design, mobile-first, interactive elements, hover effects, sliders (Swiper.js), reusable components
+- **Pages:** Home `/`, Categories `/categories`, Goods `/goods`, Product `/goods/[goodId]`, Basket `/basket`, Order `/order`, Profile `/profile`, Auth `/auth/register` & `/auth/login`
+
+## Tech Stack
+
+**Frontend:**  
+`Next.js 15`, `React 18`, `TypeScript`, `Zustand`, `React Query`, `Formik`, `Yup`, `Swiper.js`, `CSS Modules`, `modern-normalize`, `react-hot-toast`, `Prettier`
+
+**Backend:**  
+`Node.js`, `Express`, `MongoDB`, `Mongoose`, `JWT`, `Cloudinary`, `Nodemailer`, `Swagger`, `CORS`, `dotenv`
+
+## Getting Started
+
+### 1. Clone Frontend
+```bash
+git clone https://github.com/ArtemNyow/Clothica-Go-IT-prod-team-2-Front.git
+cd Clothica-Go-IT-prod-team-2-Front
 npm install
-
-3. Створити файл .env
-
-Приклад:
-
-NEXT_PUBLIC_API_URL=https://your-backend.com/api
-
-4. Запустити в dev-режимі
 npm run dev
-
-5. Зібрати білд
-npm run build
-npm start
